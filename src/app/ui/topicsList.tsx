@@ -1,22 +1,28 @@
 import Link from "next/link";
 import RemoveBtn from "./removeBtn";
 import { HiPencilAlt } from "react-icons/hi";
+import { Topic } from "@prisma/client";
 
-export default function TopicList() {
+
+
+export default function TopicList({topics}:{topics: Topic[]}) {
+
   return (
     <>
-      <div className="p-4 border border-blue-300 my-3 flex justify-between gap-5 items-start">
+    {topics.map(topic => (
+      <div key={topic.id} className="p-4 border border-blue-300 my-3 flex justify-between gap-5 items-start">
         <div>
-          <h2 className="font-bold text-2xl">Topic Title</h2>
-          <div>Topic Description</div>
+          <h2 className="font-bold text-2xl">{topic.title}</h2>
+          <div>{topic.description}</div>
         </div>
         <div className="flex gap-2">
           <RemoveBtn />
-          <Link href={"/editTopic/"}>
+          <Link href={`/editTopic/${topic.id}`}>
             <HiPencilAlt size={24} />
           </Link>
         </div>
       </div>
+      ))}
     </>
   );
 }

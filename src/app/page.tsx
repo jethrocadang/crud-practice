@@ -21,7 +21,7 @@ export default async function Home() {
 
   return (
     <main>
-      <TopicList topics={topics}/>
+      <TopicList topics={topics} />
     </main>
   );
 }
